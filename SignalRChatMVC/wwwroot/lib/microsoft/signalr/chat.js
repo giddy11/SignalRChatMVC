@@ -3,7 +3,8 @@
 //Disable the send button until connection is established.
 document.getElementById("sendButton").disabled = true;
 
-connection.on("ReceiveMessages", function (user, message) {
+//connects to methods that hub invokes aka receives notification from hub
+connection.on("ReceiveMessage", function (user, message) {
     var li = document.createElement("li");
     document.getElementById("messagesList").appendChild(li);
     // We can assign user-suplied strings to an element's textContent because it
@@ -12,12 +13,14 @@ connection.on("ReceiveMessages", function (user, message) {
     li.textContent = `${user} says ${message}`; 
 });
 
+
 connection.start().then(function () {
     document.getElementById("sendButton").disabled = false;
 }).catch(function (err) {
     return console.error(err.toString());
 });
 
+//invoke hub methods aka send notification to hub
 document.getElementById("sendButton").addEventListener("click", function (event) {
     var user = document.getElementById("userInput").value;
     var message = document.getElementById("messageInput").value;

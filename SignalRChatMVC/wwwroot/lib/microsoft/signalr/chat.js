@@ -1,11 +1,9 @@
-﻿"use strict";
-
-var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
+﻿var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
 
 //Disable the send button until connection is established.
 document.getElementById("sendButton").disabled = true;
 
-connection.on("ReceiveMessage", function (user, message) {
+connection.on("ReceiveMessages", function (user, message) {
     var li = document.createElement("li");
     document.getElementById("messagesList").appendChild(li);
     // We can assign user-suplied strings to an element's textContent because it
